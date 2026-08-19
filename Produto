@@ -1,0 +1,296 @@
+# Sistema de Estoque — Estrutura das Tabelas
+
+## 1. PRODUTO
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_produto | INT | PK, NOT NULL | Identificador único do produto |
+| nome | VARCHAR(100) | NOT NULL | Nome do produto |
+| referencia_sku | VARCHAR(50) | UNIQUE, NOT NULL | Código/referência do produto |
+| descricao | VARCHAR(255) | NULL | Descrição do produto |
+| id_categoria | INT | FK, NOT NULL | Categoria do produto |
+| unidade_medida | VARCHAR(20) | NOT NULL | Unidade de medida |
+| custo_unitario | DECIMAL(10,2) | NOT NULL | Custo unitário |
+| preco_venda | DECIMAL(10,2) | NOT NULL | Preço de venda |
+| estoque_atual | INT | NOT NULL | Quantidade atual em estoque |
+| estoque_minimo | INT | NOT NULL | Quantidade mínima |
+| estoque_maximo | INT | NULL | Quantidade máxima |
+| qtd_para_compra | INT | DEFAULT 0 | Quantidade necessária para compra |
+| qtd_para_encomenda | INT | DEFAULT 0 | Quantidade encomendada |
+| produtos_danificados | INT | DEFAULT 0 | Quantidade de produtos danificados |
+| status_estoque | ENUM | NOT NULL | Situação do estoque |
+| status_produto | ENUM | NOT NULL | Situação do produto |
+| produto_descontinuado | BOOLEAN | DEFAULT FALSE | Indica se o produto foi descontinuado |
+| data_cadastro | DATETIME | NOT NULL | Data de cadastro |
+| data_atualizacao | DATETIME | NULL | Data da última atualização |
+
+---
+
+## 2. HISTÓRICO_ESTOQUE
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_historico | INT | PK, NOT NULL | Identificador do histórico |
+| id_produto | INT | FK, NOT NULL | Produto movimentado |
+| tipo_movimentacao | ENUM | NOT NULL | Tipo da movimentação |
+| quantidade | INT | NOT NULL | Quantidade movimentada |
+| estoque_anterior | INT | NOT NULL | Estoque antes da movimentação |
+| estoque_posterior | INT | NOT NULL | Estoque após a movimentação |
+| data_hora | DATETIME | NOT NULL | Data e hora da movimentação |
+| id_usuario | INT | FK, NOT NULL | Usuário responsável |
+| motivo | VARCHAR(100) | NULL | Motivo da movimentação |
+| observacao | VARCHAR(255) | NULL | Observações |
+
+---
+
+## 3. VENDEDOR
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_vendedor | INT | PK, NOT NULL | Identificador do vendedor |
+| nome | VARCHAR(100) | NOT NULL | Nome do vendedor |
+| cpf | VARCHAR(14) | UNIQUE, NOT NULL | CPF do vendedor |
+| funcao | VARCHAR(50) | NOT NULL | Função exercida |
+| comissao_percentual | DECIMAL(5,2) | NOT NULL | Percentual de comissão |
+| meta_mensal | DECIMAL(10,2) | NULL | Meta de vendas mensal |
+| vendas_no_mes | DECIMAL(10,2) | DEFAULT 0 | Total de vendas no mês |
+| valor_vendido_no_mes | DECIMAL(10,2) | DEFAULT 0 | Valor vendido no mês |
+| status | ENUM | NOT NULL | Situação do vendedor |
+| data_cadastro | DATETIME | NOT NULL | Data de cadastro |
+
+---
+
+## 4. NOTA_FISCAL
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_nota | INT | PK, NOT NULL | Identificador da nota |
+| numero | VARCHAR(20) | UNIQUE, NOT NULL | Número da nota fiscal |
+| serie | VARCHAR(10) | NOT NULL | Série da nota |
+| chave_acesso | VARCHAR(44) | UNIQUE | Chave de acesso da NF-e |
+| data_emissao | DATETIME | NOT NULL | Data de emissão |
+| tipo | ENUM | NOT NULL | Entrada ou saída |
+| total_nota | DECIMAL(10,2) | NOT NULL | Valor total da nota |
+| id_fornecedor | INT | FK | Fornecedor relacionado |
+| id_compra | INT | FK | Compra relacionada |
+| status | ENUM | NOT NULL | Situação da nota |
+
+---
+
+## 5. ITEM_NOTA_FISCAL
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_item_nota | INT | PK, NOT NULL | Identificador do item |
+| id_nota | INT | FK, NOT NULL | Nota fiscal |
+| id_produto | INT | FK, NOT NULL | Produto |
+| quantidade | INT | NOT NULL | Quantidade do produto |
+| valor_unitario | DECIMAL(10,2) | NOT NULL | Valor unitário |
+| desconto | DECIMAL(10,2) | DEFAULT 0 | Desconto aplicado |
+| subtotal | DECIMAL(10,2) | NOT NULL | Valor total do item |
+
+---
+
+## 6. PAGAMENTO
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_pagamento | INT | PK, NOT NULL | Identificador do pagamento |
+| id_compra | INT | FK | Compra relacionada |
+| id_venda | INT | FK | Venda relacionada |
+| tipo | ENUM | NOT NULL | Forma de pagamento |
+| valor | DECIMAL(10,2) | NOT NULL | Valor do pagamento |
+| data_pagamento | DATETIME | NOT NULL | Data e hora do pagamento |
+| status | ENUM | NOT NULL | Situação do pagamento |
+| numero_parcelas | INT | DEFAULT 1 | Quantidade de parcelas |
+| valor_pago | DECIMAL(10,2) | NOT NULL | Valor efetivamente pago |
+| vencimento | DATE | NULL | Data de vencimento |
+| observacao | VARCHAR(255) | NULL | Observações |
+
+### Formas de pagamento
+
+- DINHEIRO
+- DEBITO
+- CREDITO
+- PIX
+- CHEQUE
+
+### Status do pagamento
+
+- PENDENTE
+- PAGO
+- PARCIAL
+- CANCELADO
+
+---
+
+## 7. COMPRA
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_compra | INT | PK, NOT NULL | Identificador da compra |
+| numero_compra | VARCHAR(20) | UNIQUE, NOT NULL | Número da compra |
+| id_fornecedor | INT | FK, NOT NULL | Fornecedor |
+| data_compra | DATETIME | NOT NULL | Data da compra |
+| previsao_entrega | DATE | NULL | Previsão de entrega |
+| data_entrega | DATE | NULL | Data efetiva da entrega |
+| custo_total | DECIMAL(10,2) | NOT NULL | Custo total da compra |
+| status | ENUM | NOT NULL | Situação da compra |
+| observacao | VARCHAR(255) | NULL | Observações |
+
+### Status da compra
+
+- SOLICITADA
+- APROVADA
+- EM_TRANSPORTE
+- RECEBIDA
+- CANCELADA
+
+---
+
+## 8. ITEM_COMPRA
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_item_compra | INT | PK, NOT NULL | Identificador do item |
+| id_compra | INT | FK, NOT NULL | Compra |
+| id_produto | INT | FK, NOT NULL | Produto |
+| quantidade | INT | NOT NULL | Quantidade comprada |
+| custo_unitario | DECIMAL(10,2) | NOT NULL | Custo unitário |
+| desconto | DECIMAL(10,2) | DEFAULT 0 | Desconto |
+| subtotal | DECIMAL(10,2) | NOT NULL | Subtotal do item |
+
+---
+
+## 9. FORNECEDOR
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_fornecedor | INT | PK, NOT NULL | Identificador do fornecedor |
+| razao_social | VARCHAR(100) | NOT NULL | Razão social |
+| nome_fantasia | VARCHAR(100) | NULL | Nome fantasia |
+| cnpj | VARCHAR(18) | UNIQUE, NOT NULL | CNPJ |
+| inscricao_estadual | VARCHAR(20) | NULL | Inscrição estadual |
+| endereco | VARCHAR(150) | NOT NULL | Endereço |
+| numero | VARCHAR(10) | NOT NULL | Número |
+| complemento | VARCHAR(100) | NULL | Complemento |
+| bairro | VARCHAR(100) | NOT NULL | Bairro |
+| cidade | VARCHAR(100) | NOT NULL | Cidade |
+| estado | CHAR(2) | NOT NULL | Estado |
+| cep | VARCHAR(10) | NOT NULL | CEP |
+| telefone | VARCHAR(20) | NOT NULL | Telefone |
+| email | VARCHAR(100) | NULL | E-mail |
+| contato_responsavel | VARCHAR(100) | NULL | Responsável |
+| status | ENUM | NOT NULL | Situação do fornecedor |
+| data_cadastro | DATETIME | NOT NULL | Data de cadastro |
+
+---
+
+## 10. VENDA
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_venda | INT | PK, NOT NULL | Identificador da venda |
+| numero_venda | VARCHAR(20) | UNIQUE, NOT NULL | Número da venda |
+| id_vendedor | INT | FK, NOT NULL | Vendedor responsável |
+| id_cliente | INT | FK | Cliente |
+| data_hora | DATETIME | NOT NULL | Data e hora da venda |
+| subtotal | DECIMAL(10,2) | NOT NULL | Subtotal |
+| desconto | DECIMAL(10,2) | DEFAULT 0 | Desconto |
+| total | DECIMAL(10,2) | NOT NULL | Total da venda |
+| status | ENUM | NOT NULL | Situação da venda |
+
+### Status da venda
+
+- ABERTA
+- FINALIZADA
+- CANCELADA
+- DEVOLVIDA
+
+---
+
+## 11. ITEM_VENDA
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_item_venda | INT | PK, NOT NULL | Identificador do item |
+| id_venda | INT | FK, NOT NULL | Venda |
+| id_produto | INT | FK, NOT NULL | Produto |
+| quantidade | INT | NOT NULL | Quantidade vendida |
+| preco_unitario | DECIMAL(10,2) | NOT NULL | Preço unitário |
+| desconto | DECIMAL(10,2) | DEFAULT 0 | Desconto |
+| subtotal | DECIMAL(10,2) | NOT NULL | Subtotal |
+
+---
+
+## 12. CLIENTE
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_cliente | INT | PK, NOT NULL | Identificador do cliente |
+| nome | VARCHAR(100) | NOT NULL | Nome do cliente |
+| cpf_cnpj | VARCHAR(18) | UNIQUE | CPF ou CNPJ |
+| telefone | VARCHAR(20) | NOT NULL | Telefone |
+| email | VARCHAR(100) | NULL | E-mail |
+| endereco | VARCHAR(150) | NULL | Endereço |
+| cidade | VARCHAR(100) | NULL | Cidade |
+| estado | CHAR(2) | NULL | Estado |
+| cep | VARCHAR(10) | NULL | CEP |
+| data_cadastro | DATETIME | NOT NULL | Data de cadastro |
+| status | ENUM | NOT NULL | Situação do cliente |
+
+---
+
+## 13. CATEGORIA
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_categoria | INT | PK, NOT NULL | Identificador da categoria |
+| nome | VARCHAR(100) | UNIQUE, NOT NULL | Nome da categoria |
+| descricao | VARCHAR(255) | NULL | Descrição |
+| status | ENUM | NOT NULL | Situação da categoria |
+
+---
+
+## 14. USUARIO
+
+| Campo | Tipo | Restrição | Descrição |
+|---|---|---|---|
+| id_usuario | INT | PK, NOT NULL | Identificador do usuário |
+| nome | VARCHAR(100) | NOT NULL | Nome |
+| login | VARCHAR(50) | UNIQUE, NOT NULL | Login de acesso |
+| senha | VARCHAR(255) | NOT NULL | Senha criptografada |
+| email | VARCHAR(100) | UNIQUE | E-mail |
+| perfil | ENUM | NOT NULL | Nível de acesso |
+| status | ENUM | NOT NULL | Situação do usuário |
+| ultimo_acesso | DATETIME | NULL | Último acesso |
+
+### Perfis
+
+- ADMINISTRADOR
+- GERENTE
+- ESTOQUISTA
+- VENDEDOR
+- FINANCEIRO
+
+---
+
+# RELACIONAMENTOS
+
+| Tabela origem | Relacionamento | Tabela destino |
+|---|---|---|
+| categoria | 1:N | produto |
+| produto | 1:N | historico_estoque |
+| usuario | 1:N | historico_estoque |
+| fornecedor | 1:N | compra |
+| compra | 1:N | item_compra |
+| produto | 1:N | item_compra |
+| compra | 1:N | nota_fiscal |
+| nota_fiscal | 1:N | item_nota_fiscal |
+| produto | 1:N | item_nota_fiscal |
+| vendedor | 1:N | venda |
+| cliente | 1:N | venda |
+| venda | 1:N | item_venda |
+| produto | 1:N | item_venda |
+| compra | 1:N | pagamento |
+| venda | 1:N | pagamento |
