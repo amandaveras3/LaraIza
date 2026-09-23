@@ -1,0 +1,14 @@
+{
+  "name": "lara-iza-estoque",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lara Iza — sistema profissional de gestão de estoque",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-config.mjs",
+    "dev": "node scripts/dev-server.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
