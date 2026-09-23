@@ -1,0 +1,343 @@
+<!doctype html>
+
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#7c4dff" />
+
+    <title>Lara Iza | Estoque</title>
+
+    <link rel="icon" type="image/png" href="assets/logo.png" />
+    <link rel="apple-touch-icon" href="assets/logo.png" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="description" content="Lara Iza — sistema profissional de gestão de estoque." />
+</head>
+
+<body>
+
+    <div id="authScreen" class="auth-screen" hidden>
+
+        <div class="auth-card">
+
+            <div class="auth-brand">
+
+                <img src="assets/logo.png" alt="Lara Iza" class="auth-logo" />
+
+                <div>
+
+                    <h1>Lara Iza</h1>
+
+                    <p>Sistema de Estoque</p>
+
+                </div>
+
+            </div>
+
+            <form id="loginForm" class="auth-form">
+
+                <div class="auth-title">
+
+                    <h2>Entrar</h2>
+
+                    <p>
+                        Acesse sua conta para continuar.
+                    </p>
+
+                </div>
+
+
+                <label>
+
+                E-mail
+
+                <input
+                    type="email"
+                    id="loginEmail"
+                    placeholder="seu@email.com"
+                    required
+                />
+
+            </label>
+
+
+                <label>
+
+                Senha
+
+                <input
+                    type="password"
+                    id="loginPassword"
+                    placeholder="Digite sua senha"
+                    required
+                />
+
+            </label>
+
+
+                <button type="submit" class="auth-submit">
+                Entrar no sistema
+            </button>
+
+
+                <p class="auth-switch">
+
+                    Ainda não possui uma conta?
+
+                    <button type="button" id="showRegister">
+                    Criar conta
+                </button>
+
+                </p>
+
+            </form>
+
+            <form id="registerForm" class="auth-form" hidden>
+
+                <div class="auth-title">
+
+                    <h2>Criar conta</h2>
+
+                    <p>
+                        Cadastre seu acesso ao sistema.
+                    </p>
+
+                </div>
+
+
+                <label>
+
+                Nome completo
+
+                <input
+                    type="text"
+                    id="registerName"
+                    placeholder="Seu nome"
+                    required
+                />
+
+            </label>
+
+
+                <label>
+
+                E-mail
+
+                <input
+                    type="email"
+                    id="registerEmail"
+                    placeholder="seu@email.com"
+                    required
+                />
+
+            </label>
+
+
+                <label>
+
+                Senha
+
+                <input
+                    type="password"
+                    id="registerPassword"
+                    placeholder="Crie uma senha"
+                    minlength="6"
+                    required
+                />
+
+            </label>
+
+
+                <label>
+
+                Confirmar senha
+
+                <input
+                    type="password"
+                    id="registerPasswordConfirm"
+                    placeholder="Digite novamente"
+                    minlength="6"
+                    required
+                />
+
+            </label>
+
+
+                <button type="submit" class="auth-submit">
+                Criar minha conta
+            </button>
+
+
+                <p class="auth-switch">
+
+                    Já possui uma conta?
+
+                    <button type="button" id="showLogin">
+                    Fazer login
+                </button>
+
+                </p>
+
+            </form>
+
+
+            <p id="authMessage" class="auth-message"></p>
+
+        </div>
+
+    </div>
+
+    <div class="app" id="app">
+
+        <aside class="sidebar" id="sidebar">
+
+            <div class="brand">
+
+                <img src="assets/logo.png" alt="Lara Iza" class="logo" />
+
+                <div class="brand-text">
+                    <strong>Lara Iza</strong>
+                    <small>Sistema de Estoque</small>
+                </div>
+
+            </div>
+
+
+            <button class="collapse-btn" id="collapseBtn" title="Recolher navegação" aria-label="Recolher navegação">
+                ‹
+            </button>
+
+
+            <div class="nav-scroll">
+
+                <nav id="mainNav" class="nav-group"></nav>
+
+                <div class="nav-sep"></div>
+
+                <nav id="adminNav" class="nav-group"></nav>
+
+            </div>
+
+
+            <button class="support" id="supportBtn">
+
+                <span
+                    class="support-icon"
+                    data-icon="headphones"
+                ></span>
+
+                <span class="support-text">
+                    <b>Precisa de ajuda?</b>
+                    <small>Acesse nosso suporte</small>
+                </span>
+
+            </button>
+
+        </aside>
+
+        <main class="main">
+
+            <header class="topbar">
+
+                <div class="heading"><span id="saveStatus" class="save-status">Carregando…</span>
+
+                    <h1 id="pageTitle">
+                        Bem-vinda de volta, Claudia!
+                    </h1>
+
+                    <p id="pageSubtitle">
+                        Aqui está o resumo do seu estoque hoje.
+                    </p>
+
+                </div>
+
+                <div class="top-actions">
+
+                    <div class="global-search">
+
+                        <span data-icon="search" class="custom-search-icon" aria-hidden="true"></span>
+
+                        <input id="globalSearch" placeholder="Buscar produtos, categorias, fornecedores, clientes..." autocomplete="off" />
+
+                        <div id="searchResults" class="search-results"></div>
+
+                    </div>
+
+                    <button class="theme-toggle" id="themeToggle" aria-label="Alternar entre modo claro e escuro" title="Alternar tema">
+
+                        <span class="theme-icon theme-sun" data-icon="sun" aria-hidden="true"></span>
+                        <span class="theme-divider" aria-hidden="true"></span>
+                        <span class="theme-icon theme-moon" data-icon="moon" aria-hidden="true"></span>
+
+                        <span id="themeLabel">
+                            Claro
+                        </span>
+
+                    </button>
+
+                    <button class="top-icon" id="notificationBtn" aria-label="Notificações">
+
+                        <span data-icon="bell" class="custom-bell-icon" aria-hidden="true"></span>
+
+                        <b id="notificationCount">
+                            3
+                        </b>
+
+                    </button>
+
+
+                    <button class="profile-btn" id="profileBtn">
+
+                        <span
+                            class="avatar"
+                            id="avatarTop"
+                        >
+                            A
+                        </span>
+
+                        <span
+                            class="profile-name"
+                            id="profileNameTop"
+                        >
+                            Amanda
+                        </span>
+
+                        <span data-icon="chevron"></span>
+
+                    </button>
+
+
+                </div>
+
+            </header>
+
+            <div id="page" class="page-container"></div>
+
+            <footer id="appFooter" class="app-footer" aria-label="Rodapé do sistema">
+                <div class="footer-brand"><strong>Lara Iza</strong><span>Gestão de estoque</span></div>
+                <nav class="footer-links" aria-label="Links institucionais">
+                    <button data-page="Suporte">Suporte</button>
+                    <button data-page="Termos de Uso">Termos de uso</button>
+                    <button data-page="Privacidade">Privacidade</button>
+                </nav>
+                <div class="footer-contact"><span>Atendimento</span><a href="mailto:suporte@laraiza.com">suporte@laraiza.com</a></div>
+                <small>© 2026 Lara Iza. Todos os direitos reservados.</small>
+            </footer>
+
+        </main>
+
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <div id="modalRoot"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
