@@ -1,55 +1,41 @@
 # Lara Iza
 
-Sistema web desenvolvido para gerenciamento, visualização e análise de informações, com interface responsiva, recursos interativos e integração com o Supabase.
+Aplicação web desenvolvida para gerenciamento e visualização de dados, com interface responsiva, componentes interativos, gráficos e integração com o Supabase.
 
-## Sobre o projeto
+## Descrição
 
-O Lara Iza é uma aplicação web desenvolvida utilizando tecnologias modernas de desenvolvimento front-end e serviços em nuvem.
+O Lara Iza é um projeto web desenvolvido com HTML, CSS e JavaScript, integrado ao Supabase para armazenamento e gerenciamento de dados.
 
-O projeto foi estruturado para proporcionar uma experiência de utilização intuitiva, com organização de informações, visualização de dados por meio de gráficos, componentes interativos e integração com banco de dados.
+A aplicação possui uma interface responsiva e recursos destinados à apresentação e análise das informações, incluindo gráficos, indicadores e elementos interativos.
 
-A aplicação pode ser executada localmente para desenvolvimento e testes e também está preparada para publicação por meio do Netlify.
+O projeto utiliza GitHub para versionamento e Netlify para hospedagem e publicação da aplicação.
 
-## Principais recursos
+## Funcionalidades
 
-* Interface web responsiva;
-* Sistema de navegação interativo;
-* Integração com banco de dados Supabase;
-* Consulta e gerenciamento de dados;
-* Visualização de informações por meio de gráficos;
-* Componentes e animações de interface;
-* Execução em ambiente local;
-* Versionamento utilizando Git e GitHub;
-* Deploy e hospedagem utilizando Netlify.
+* Interface responsiva para diferentes tamanhos de tela
+* Interface interativa e dinâmica
+* Integração com Supabase
+* Armazenamento e consulta de dados
+* Visualização de dados por meio de gráficos
+* Indicadores e informações dinâmicas
+* Animações e componentes interativos
+* Execução em ambiente local
+* Deploy integrado ao GitHub e Netlify
 
-## Tecnologias utilizadas
-
-### Front-end
+## Tecnologias
 
 * HTML5
 * CSS3
 * JavaScript
-
-### Backend e banco de dados
-
 * Supabase
 * PostgreSQL
-
-### Ferramentas de desenvolvimento
-
-* Visual Studio Code
 * Node.js
 * npm
 * Git
 * GitHub
-
-### Hospedagem
-
 * Netlify
 
-## Estrutura do projeto
-
-A estrutura do projeto pode variar de acordo com a versão utilizada. De forma geral:
+## Estrutura
 
 ```text
 LaraIza/
@@ -63,16 +49,18 @@ LaraIza/
 └── README.md
 ```
 
+A estrutura pode sofrer alterações conforme a evolução do projeto.
+
 ## Requisitos
 
-Para executar o projeto localmente, é necessário possuir:
+Para executar o projeto localmente, é necessário instalar:
 
-* Node.js;
-* npm;
-* Git;
-* Visual Studio Code ou outro editor de código.
+* Node.js
+* npm
+* Git
+* Visual Studio Code
 
-Para verificar as versões instaladas:
+Verifique as versões instaladas:
 
 ```bash
 node --version
@@ -88,7 +76,7 @@ Clone o repositório:
 git clone https://github.com/amandaveras3/LaraIza.git
 ```
 
-Acesse o diretório:
+Entre na pasta do projeto:
 
 ```bash
 cd LaraIza
@@ -100,17 +88,17 @@ Instale as dependências:
 npm install
 ```
 
-## Execução local
+## Execução
 
-Após a instalação das dependências, execute o projeto utilizando o comando configurado no `package.json`.
-
-Em projetos configurados com Vite:
+Execute o projeto em ambiente de desenvolvimento:
 
 ```bash
 npm run dev
 ```
 
-O terminal apresentará o endereço local da aplicação, normalmente:
+Depois, acesse o endereço informado pelo terminal.
+
+Em uma configuração padrão do Vite:
 
 ```text
 http://localhost:5173
@@ -118,9 +106,9 @@ http://localhost:5173
 
 ## Configuração do Supabase
 
-O Lara Iza utiliza o Supabase para armazenamento e gerenciamento dos dados da aplicação.
+O projeto utiliza o Supabase como serviço de banco de dados e backend.
 
-A configuração do projeto utiliza as seguintes informações:
+A aplicação utiliza uma configuração semelhante a:
 
 ```javascript
 window.LARA_IZA_CONFIG = {
@@ -129,69 +117,50 @@ window.LARA_IZA_CONFIG = {
 };
 ```
 
-Os valores devem ser configurados de acordo com o projeto correspondente no Supabase.
+Substitua os valores pelos dados correspondentes ao projeto no Supabase.
 
 ### Segurança
 
-A aplicação deve utilizar somente credenciais apropriadas para uso no cliente.
+A chave utilizada no código do cliente deve ser exclusivamente uma chave pública.
 
-A `anon key` ou chave pública pode ser utilizada no front-end quando as permissões do banco estiverem corretamente configuradas.
+Não disponibilize no repositório:
 
-A `Service Role Key` não deve ser inserida no código do front-end, no GitHub ou em qualquer arquivo disponibilizado publicamente.
+* Service Role Key
+* Senhas
+* Tokens privados
+* Credenciais administrativas
 
-O controle de acesso aos dados deve ser realizado utilizando as políticas de Row Level Security (RLS) do Supabase.
+O controle de acesso aos dados deve ser realizado por meio das políticas de Row Level Security (RLS) do Supabase.
 
-## Banco de dados
+## Desenvolvimento
 
-O banco de dados utilizado pelo projeto é baseado em PostgreSQL e disponibilizado pelo Supabase.
+Durante o desenvolvimento, recomenda-se executar a aplicação localmente antes de enviar alterações ao repositório.
 
-Para configurar o ambiente corretamente, é necessário garantir que:
-
-1. O projeto do Supabase esteja ativo;
-2. As tabelas utilizadas pela aplicação estejam criadas;
-3. As colunas necessárias estejam configuradas;
-4. As políticas de acesso estejam definidas;
-5. A URL e a chave pública estejam corretamente configuradas.
-
-## Visualização de dados
-
-O sistema possui recursos para apresentação visual das informações, incluindo gráficos e indicadores.
-
-Esses recursos permitem organizar e apresentar os dados de forma mais clara, facilitando sua interpretação e acompanhamento.
-
-## Deploy
-
-O projeto pode ser hospedado utilizando o Netlify e integrado diretamente ao repositório do GitHub.
-
-O fluxo de publicação é:
+Fluxo de desenvolvimento:
 
 ```text
-Alteração no código
-        ↓
-Teste local
-        ↓
+Alteração do código
+       ↓
+Execução local
+       ↓
+Testes
+       ↓
 Git
-        ↓
+       ↓
 GitHub
-        ↓
+       ↓
 Netlify
-        ↓
-Build
-        ↓
-Aplicação publicada
 ```
 
-Após a configuração da integração entre GitHub e Netlify, novos commits enviados para a branch configurada podem iniciar automaticamente um novo deploy.
+## Atualização do repositório
 
-## Atualização do projeto
-
-Após realizar alterações no código, verifique os arquivos modificados:
+Após realizar alterações:
 
 ```bash
 git status
 ```
 
-Adicione as alterações:
+Adicione os arquivos:
 
 ```bash
 git add .
@@ -203,93 +172,105 @@ Crie um commit:
 git commit -m "Atualiza projeto Lara Iza"
 ```
 
-Envie as alterações para o GitHub:
+Envie para o GitHub:
 
 ```bash
 git push origin main
 ```
 
-Caso o projeto utilize outra branch como principal, substitua `main` pelo nome correspondente.
+## Deploy
 
-## Processo recomendado
+O projeto está preparado para utilização com o Netlify.
 
-O fluxo de desenvolvimento recomendado é:
+Com a integração entre GitHub e Netlify configurada, o processo de publicação ocorre a partir dos commits enviados ao repositório.
+
+Fluxo de publicação:
 
 ```text
-1. Alterar o código
-2. Executar o projeto localmente
-3. Testar as funcionalidades
-4. Verificar o Console do navegador
-5. Executar git status
-6. Executar git add .
-7. Criar o commit
-8. Executar git push
-9. Verificar o GitHub
-10. Verificar o deploy no Netlify
+GitHub
+   ↓
+Netlify
+   ↓
+Build
+   ↓
+Deploy
+   ↓
+Aplicação publicada
 ```
+
+## Banco de dados
+
+O banco de dados utiliza PostgreSQL por meio do Supabase.
+
+Para o funcionamento correto da aplicação, o ambiente deve possuir:
+
+* Tabelas necessárias;
+* Colunas utilizadas pelo sistema;
+* Relacionamentos necessários;
+* Políticas RLS;
+* Permissões adequadas;
+* Configuração correta da API.
 
 ## Solução de problemas
 
-### Erro ao instalar dependências
+### Dependências
 
-Execute:
+Caso ocorram problemas com as dependências:
 
 ```bash
 npm install
 ```
 
-Se o problema persistir, verifique a versão do Node.js e as mensagens apresentadas pelo npm.
+### Verificação do projeto
 
-### Erro na conexão com o Supabase
-
-Verifique:
-
-* URL do projeto;
-* chave pública;
-* nome das tabelas;
-* nomes das colunas;
-* permissões;
-* políticas RLS;
-* erros exibidos no Console do navegador.
-
-### Alterações não aparecem no site
-
-Verifique se as alterações foram enviadas corretamente:
+Para verificar arquivos modificados:
 
 ```bash
 git status
-git add .
-git commit -m "Atualiza projeto"
-git push
 ```
 
-Em seguida, verifique o histórico de deploys no Netlify.
+Para verificar problemas durante a execução, consulte o terminal e o Console do navegador.
+
+### Supabase
+
+Em caso de problemas de conexão, verifique:
+
+* URL do Supabase;
+* chave pública;
+* tabelas;
+* colunas;
+* permissões;
+* políticas RLS;
+* mensagens exibidas no Console.
+
+### Netlify
+
+Caso uma alteração não apareça no site publicado, verifique:
+
+1. Se o commit foi enviado ao GitHub;
+2. Se o Netlify iniciou um novo deploy;
+3. Se o build foi concluído sem erros;
+4. Se a branch utilizada pelo Netlify está correta;
+5. Se as configurações de ambiente estão corretas.
 
 ## Boas práticas
 
-* Manter o código organizado e documentado;
-* Utilizar commits objetivos e descritivos;
-* Testar alterações antes do deploy;
-* Não armazenar credenciais privadas no repositório;
-* Utilizar políticas RLS no Supabase;
+* Manter o código organizado;
+* Utilizar commits descritivos;
+* Testar alterações localmente;
+* Não publicar credenciais privadas;
+* Configurar corretamente as políticas RLS;
 * Manter as dependências atualizadas;
-* Verificar erros do navegador durante o desenvolvimento;
-* Utilizar branches quando necessário para novas funcionalidades ou correções.
+* Verificar erros antes do deploy.
 
-## Status do projeto
+## Status
 
 Em desenvolvimento.
 
-O projeto pode receber novas funcionalidades, melhorias de interface, otimizações de desempenho e atualizações na estrutura de dados.
+## Repositório
 
-## Autoria
-
-Projeto Lara Iza.
-
-Repositório:
-
-https://github.com/amandaveras3/LaraIza
+[GitHub — Lara Iza](https://github.com/amandaveras3/LaraIza)
 
 ## Licença
 
-As condições de utilização, distribuição e modificação deste projeto devem seguir as definições estabelecidas pelos responsáveis pelo desenvolvimento.
+Projeto desenvolvido para fins acadêmicos e/ou de desenvolvimento. As condições de utilização, distribuição e modificação devem seguir as definições estabelecidas pelos responsáveis pelo projeto.
