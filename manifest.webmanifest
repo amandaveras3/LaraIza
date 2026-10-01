@@ -1,0 +1,10 @@
+{
+  "name": "Lara Iza — Gestão de Estoque",
+  "short_name": "Lara Iza",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0b111a",
+  "theme_color": "#7c4dff",
+  "description": "Sistema profissional de gestão de estoque.",
+  "icons": [{"src":"assets/logo.png","sizes":"192x192","type":"image/png"},{"src":"assets/logo.png","sizes":"512x512","type":"image/png"}]
+}
